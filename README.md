@@ -8,3 +8,7 @@ This research aims to answer the following questions:
 1. When cities establish a policy or portal do they see a subsequent decline in the number of public records requests? 
 2. How do the records requests or requesters change after the portal/policy is passed?
 3. In general, how does demand for public data change as cities adopt and expand open data policies and programs?
+
+## Status
+
+This project is currently ongoing and all documents in this repository are intermediate files. 
