@@ -1,6 +1,6 @@
 {"Albuquerque city": {
 	"state":"NM",
-	"wwc": ,
+	"wwc": "Y",
 	"portal_type": "NR",
 	"odp":"N",
 	"odp_launch":,
@@ -9,7 +9,7 @@
 	},
  "Arlington city": {
  	"state": "WA",
- 	"wwc":,
+ 	"wwc":"N",
  	"portal_type": "GQ",
 	"odp":"N",
 	"odp_launch":,
@@ -27,7 +27,7 @@
 	},
  "Bainbridge Island city": {
  	"state": "WA",
- 	"wwc":,
+ 	"wwc":"N",
  	"portal_type": "NR",
 	"odp":"N",
 	"odp_launch":,
@@ -36,7 +36,7 @@
 	},
  "Belleville city": {
  	"state": "IL",
- 	"wwc":,
+ 	"wwc":"N",
  	"portal_type": "GQ",
 	"odp":"N",
 	"odp_launch":,
@@ -54,7 +54,7 @@
 	},
  "Cathedral City city": {
  	"state": "CA",
- 	"wwc":,
+ 	"wwc":"N",
  	"portal_type": "GQ",
 	"odp":"N",
 	"odp_launch":,
@@ -81,7 +81,7 @@
 	},
  "Columbia city": {
  	"state": "MO",
- 	"wwc":,
+ 	"wwc": "Y",
  	"portal_type": "GQ",
 	"odp":"N",
 	"odp_launch":,
@@ -117,7 +117,7 @@
 	},
  "Galveston city": {
  	"state": "TX",
- 	"wwc":,
+ 	"wwc": "Y",
  	"portal_type": "GQ",
 	"odp":"N",
 	"odp_launch":,
@@ -135,7 +135,7 @@
 	},
  "Joliet city" : {
  	"state": "IL",
- 	"wwc":,
+ 	"wwc": "Y",
  	"portal_type": "GQ",
 	"odp":"N",
 	"odp_launch":,
@@ -153,7 +153,7 @@
 	},
  "Las Cruces city": {
  	"state": "NM",
- 	"wwc":,
+ 	"wwc": "N",
  	"portal_type": "NR",
 	"odp":"N",
 	"odp_launch":,
@@ -171,7 +171,7 @@
 	},
  "Lynnwood city": {
  	"state": "WA",
- 	"wwc":,
+ 	"wwc": "N",
  	"portal_type": "GQ",
 	"odp":"N",
 	"odp_launch":,
@@ -180,7 +180,7 @@
 	},
  "Mercer Island": {
  	"state": "WA",
- 	"wwc":,
+ 	"wwc": "N",
  	"portal_type": "NR",
 	"odp":"N",
 	"odp_launch":,
@@ -189,7 +189,7 @@
 	},
  "Miami city": {
  	"state": "FL",
- 	"wwc":,
+ 	"wwc": "Y",
  	"portal_type": "NR",
 	"odp":"N",
 	"odp_launch":,
@@ -198,7 +198,7 @@
 	},
  "Middleborough city" : {
  	"state": "MA",
- 	"wwc":,
+ 	"wwc": "N",
  	"portal_type": "NR",
 	"odp":"N",
 	"odp_launch":,
@@ -243,7 +243,7 @@
 	},
  "Providence city" : {
  	"state": "RI",
- 	"wwc": "",
+ 	"wwc": "Y",
  	"portal_type": "NR",
 	"odp":"Y",
 	"odp_launch": "03-19-2012",
@@ -252,7 +252,7 @@
 	},
  "Pullman city" : {
  	"state": "WA",
- 	"wwc":,
+ 	"wwc": "N",
  	"portal_type": "GQ",
 	"odp":"N",
 	"odp_launch":,
@@ -270,7 +270,7 @@
 	},
  "Redmond city" : {
  	"state": "WA",
- 	"wwc": "Y",
+ 	"wwc": "N",
  	"portal_type": "GQ",
 	"odp":"N",
 	"odp_launch":,
@@ -279,7 +279,7 @@
 	},
  "Renton city" : {
  	"state": "WA",
- 	"wwc": "Y",
+ 	"wwc": "N",
  	"portal_type": "GQ",
 	"odp":"N",
 	"odp_launch":,
@@ -297,7 +297,7 @@
 	},
  "Sacramento city" : {
  	"state": "CA",
- 	"wwc":,
+ 	"wwc": "Y",
  	"portal_type": "GQ",
 	"odp":"Y",
 	"odp_launch": "2013",
@@ -315,7 +315,7 @@
 	},
  "San Francisco city" : {
  	"state": "CA",
- 	"wwc":,
+ 	"wwc": "Y",
  	"portal_type": "NR",
 	"odp":"Y",
 	"odp_launch": "2009",
@@ -342,7 +342,7 @@
 	},
  "Tukwila city" : {
  	"state": "WA",
- 	"wwc":,
+ 	"wwc": "Y",
  	"portal_type": "GQ",
 	"odp":"N",
 	"odp_launch":,
@@ -351,7 +351,7 @@
 	},
  "Vallejo city" : {
  	"state": "CA",
- 	"wwc":,
+ 	"wwc": "Y",
  	"portal_type": "NR",
 	"odp":"N",
 	"odp_launch":,
@@ -360,7 +360,7 @@
 	},
  "Washington city" : {
  	"state": "DC",
- 	"wwc":,
+ 	"wwc": "Y",
  	"portal_type": "C",
 	"odp":"Y",
 	"odp_launch": "2006",
@@ -369,7 +369,7 @@
 	},
  "West Sacramento city" : {
  	"state": "CA",
- 	"wwc":,
+ 	"wwc": "N",
  	"portal_type": "NR",
 	"odp":"Y",
 	"odp_launch": "10-16-2013",
@@ -378,7 +378,7 @@
 	},
  "Winchester city" : {
  	"state": "VA",
- 	"wwc":,
+ 	"wwc": "Y",
  	"portal_type": "GQ",
 	"odp":"N",
 	"odp_launch":,
