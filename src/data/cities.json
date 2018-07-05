@@ -1,0 +1,486 @@
+{"Albuquerque city": {
+	"state":"NM",
+	"wwc": "Y",
+	"portal_type": "NR",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "Y",
+	"robust_portal": "Y",
+	"portal_launch":"01-01-2012" 
+	},
+ "Alexandria city": {
+	"state":"VA",
+	"wwc": "N",
+	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "Y",
+	"robust_portal": "N",
+	"portal_launch":"" 
+	},
+ "Arlington city": {
+ 	"state": "WA",
+ 	"wwc":"N",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Asheville city": {
+ 	"state": "NC",
+ 	"wwc": "N", 
+ 	"portal_type": "C",
+	"odp":"Y",
+	"odp_launch": "10-13-2015",
+	"portal": "Y",
+	"robust_portal": "Y",
+	"portal_launch": "06-01-2016" 
+	},
+ "Bainbridge Island city": {
+ 	"state": "WA",
+ 	"wwc":"N",
+ 	"portal_type": "NR",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Belleville city": {
+ 	"state": "IL",
+ 	"wwc":"N",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch": ""
+	},
+ "Bellevue city": {
+ 	"state": "WA",
+ 	"wwc":"Y",
+ 	"portal_type": "GQ",
+	"odp":"Y",
+	"odp_launch":"08-01-2016",
+	"portal": "Y",
+	"portal_launch": "02-17-2016"
+	},
+ "Boulder city": {
+ 	"state": "CO",
+ 	"wwc": "Y",
+ 	"portal_type": "GQ",
+	"odp":"Y",
+	"odp_launch": "07-01-2016",
+	"portal": "Y",
+	"robust_portal": "",
+	"portal_launch": "04-01-2013"
+	},
+ "Cape Coral city": {
+ 	"state": "FL",
+ 	"wwc": "Y",
+ 	"portal_type": "GQ",
+	"odp":"Y",
+	"odp_launch": "11-02-2016",
+	"portal": "Y",
+	"robust_portal": "N",
+	"portal_launch":"05-01-2017"
+	}, 
+ "Cathedral City city": {
+ 	"state": "CA",
+ 	"wwc":"N",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch": ""
+	},
+"Chelmsford city": {
+ 	"state": "MA",
+ 	"wwc": "N",
+ 	"portal_type": "C",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+"Clark county": {
+ 	"state": "WA",
+ 	"wwc": "N",
+ 	"portal_type": "C",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Columbia city": {
+ 	"state": "MO",
+ 	"wwc": "Y",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Dayton city": {
+ 	"state": "OH",
+ 	"wwc": "Y",
+ 	"portal_type": "C",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Denton city": {
+ 	"state": "TX",
+ 	"wwc": "Y",
+ 	"portal_type": "GQ",
+	"odp":"Y",
+	"odp_launch":"11-03-2016",
+	"portal": "Y",
+	"robust_portal": "Y",
+	"portal_launch":"02-09-2015" 
+	},
+ "El Dorado county" : {
+ 	"state": "CA",
+ 	"wwc": "N",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch": ""
+	},
+ "Everett city": {
+ 	"state": "WA",
+ 	"wwc": "N",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch": ""
+	},
+ "Fort Collins city":{
+ 	"state": "CO",
+ 	"wwc": "Y",
+ 	"portal_type": "GQ",
+	"odp":"Y",
+	"odp_launch": "02-07-2017",
+	"portal": "Y",
+	"robust_portal": "N",
+	"portal_launch": "2017"
+	},
+ "Fort Worth city":{
+ 	"state": "TX",
+ 	"wwc": "Y",
+ 	"portal_type": "GQ",
+	"odp":"Y",
+	"odp_launch": "10-14-2016",
+	"portal": "Y",
+	"robust_portal": "N",
+	"portal_launch": "07-01-2014"
+	},
+ "Galveston city": {
+ 	"state": "TX",
+ 	"wwc": "N",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Greensboro city": {
+ 	"state": "NC",
+ 	"wwc": "Y",
+ 	"portal_type": "C",
+	"odp":"Y",
+	"odp_launch": "10-07-2016",
+	"portal": "Y",
+	"robust_portal": "N",
+	"portal_launch": "10-20-2016" 
+	},
+ "Joliet city" : {
+ 	"state": "IL",
+ 	"wwc": "N",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Kirkland city": {
+ 	"state": "WA",
+ 	"wwc": "N",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Las Cruces city": {
+ 	"state": "NM",
+ 	"wwc": "N",
+ 	"portal_type": "NR",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "Y",
+	"robust_portal": "N",
+	"portal_launch": "2016" 
+	},
+ "Las Vegas city": {
+ 	"state": "NV",
+ 	"wwc": "Y",
+ 	"portal_type": "GQ",
+	"odp":"Y",
+	"odp_launch": "04-12-2016",
+	"portal": "Y",
+	"robust_portal": "Y",
+	"portal_launch": ""
+	},
+ "Lynnwood city": {
+ 	"state": "WA",
+ 	"wwc": "N",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Mercer Island city": {
+ 	"state": "WA",
+ 	"wwc": "N",
+ 	"portal_type": "NR",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Miami city": {
+ 	"state": "FL",
+ 	"wwc": "Y",
+ 	"portal_type": "NR",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "Y",
+	"robust_portal": "N",
+	"portal_launch": "2018" 
+	},
+ "Middleborough city" : {
+ 	"state": "MA",
+ 	"wwc": "N",
+ 	"portal_type": "NR",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "New Orleans city" : {
+ 	"state": "LA",
+ 	"wwc": "Y",
+ 	"portal_type": "NR",
+	"odp":"Y",
+	"odp_launch": "09-01-2016",
+	"portal": "Y",
+	"robust_portal": "N",
+	"portal_launch":"" 
+	},
+ "Oakland city" : {
+ 	"state": "CA",
+ 	"wwc": "N",
+ 	"portal_type": "NR",
+	"odp":"Y",
+	"odp_launch":"10-15-2013",
+	"portal": "Y",
+	"robust_portal": "Y",
+	"portal_launch": "2013"
+	},
+ "Oaklahoma City city": {
+ 	"state": "OK",
+ 	"wwc": "Y",
+ 	"portal_type": "C",
+	"odp":"N",
+	"odp_launch": "",
+	"portal": "Y",
+	"robust_portal": "N",
+	"portal_launch": "01-26-2015"
+	},
+ "Olympia city" : {
+ 	"state": "WA",
+ 	"wwc": "N",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":""
+	},
+ "Palo Alto city" : {
+ 	"state": "CA",
+ 	"wwc": "Y",
+ 	"portal_type": "GQ",
+	"odp":"Y",
+	"odp_launch": "02-03-2014",
+	"portal": "Y",
+	"robust_portal": "N",
+	"portal_launch": "08-01-2012"
+	},
+ "Peoria city": {
+ 	"state": "AZ",
+ 	"wwc": "N",
+ 	"portal_type": "C",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Providence city" : {
+ 	"state": "RI",
+ 	"wwc": "Y",
+ 	"portal_type": "NR",
+	"odp":"Y",
+	"odp_launch": "03-19-2012",
+	"portal": "Y",
+	"robust_portal": "Y",
+	"portal_launch": "06-01-2013"
+	},
+ "Pullman city" : {
+ 	"state": "WA",
+ 	"wwc": "N",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Rancho Cucamonga city" : {
+ 	"state": "CA",
+ 	"wwc": "Y",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Redmond city" : {
+ 	"state": "WA",
+ 	"wwc": "N",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "Y",
+	"robust_portal": "N",
+	"portal_launch":"06-05-2013" 
+	},
+ "Renton city" : {
+ 	"state": "WA",
+ 	"wwc": "N",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Riverside city" : {
+ 	"state": "CA",
+ 	"wwc": "Y",
+ 	"portal_type": "GQ",
+	"odp":"Y",
+	"odp_launch": "03-07-2017",
+	"portal": "Y",
+	"robust_portal": "N",
+	"portal_launch":"01-01-2014" 
+	},
+ "Sacramento city" : {
+ 	"state": "CA",
+ 	"wwc": "N",
+ 	"portal_type": "GQ",
+	"odp":"Y",
+	"odp_launch": "2013",
+	"portal": "Y",
+	"robust_portal": "Y",
+	"portal_launch": "12-01-2013"
+	},
+ "Salt Lake City city" : {
+ 	"state": "UT",
+ 	"wwc": "Y",
+ 	"portal_type": "GQ",
+	"odp":"Y",
+	"odp_launch": "2014",
+	"portal": "Y",
+	"robust_portal": "N",
+	"portal_launch": ""
+	},
+ "San Francisco city" : {
+ 	"state": "CA",
+ 	"wwc": "Y",
+ 	"portal_type": "NR",
+	"odp":"Y",
+	"odp_launch": "10-21-2009",
+	"portal": "Y",
+	"robust_portal": "Y",
+	"portal_launch": "01-01-2009"
+	},
+ "San Mateo city" : {
+ 	"state": "CA",
+ 	"wwc":"N",
+ 	"portal_type": "GQ",
+	"odp":"Y",
+	"odp_launch": "03-07-2013",
+	"portal": "Y",
+	"robust_portal": "Y",
+	"portal_launch": ""
+	},
+ "Saint Paul city" : {
+ 	"state": "MN",
+ 	"wwc": "Y",
+ 	"portal_type": "GQ",
+	"odp":"Y",
+	"odp_launch":"04-27-2017",
+	"portal": "Y",
+	"portal_launch":"" 
+	},
+ "Tukwila city" : {
+ 	"state": "WA",
+ 	"wwc": "N",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Vallejo city" : {
+ 	"state": "CA",
+ 	"wwc": "N",
+ 	"portal_type": "NR",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
+ "Washington city" : {
+ 	"state": "DC",
+ 	"wwc": "Y",
+ 	"portal_type": "C",
+	"odp":"Y",
+	"odp_launch": "2006",
+	"portal": "Y",
+	"robust_portal": "Y",
+	"portal_launch":"08-01-2014" 
+	},
+ "West Sacramento city" : {
+ 	"state": "CA",
+ 	"wwc": "N",
+ 	"portal_type": "NR",
+	"odp":"Y",
+	"odp_launch": "10-16-2013",
+	"portal": "Y",
+	"robust_portal": "Y",
+	"portal_launch":"" 
+	},
+ "Winchester city" : {
+ 	"state": "VA",
+ 	"wwc": "N",
+ 	"portal_type": "GQ",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	}
+
+}
