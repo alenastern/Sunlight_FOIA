@@ -1,4 +1,5 @@
 {"Albuquerque city": {
+	"name": "Albuquerque",
 	"state":"NM",
 	"wwc": "Y",
 	"portal_type": "NR",
@@ -9,6 +10,7 @@
 	"portal_launch":"01-01-2012" 
 	},
  "Alexandria city": {
+ 	"name": "Alexandria",
 	"state":"VA",
 	"wwc": "N",
 	"portal_type": "GQ",
@@ -19,6 +21,7 @@
 	"portal_launch":"" 
 	},
  "Arlington city": {
+ 	"name": "Arlington",
  	"state": "WA",
  	"wwc":"N",
  	"portal_type": "GQ",
@@ -28,6 +31,7 @@
 	"portal_launch":"" 
 	},
  "Asheville city": {
+ 	"name": "Asheville",
  	"state": "NC",
  	"wwc": "N", 
  	"portal_type": "C",
@@ -38,6 +42,7 @@
 	"portal_launch": "06-01-2016" 
 	},
  "Bainbridge Island city": {
+ 	"name": "Bainbridge",
  	"state": "WA",
  	"wwc":"N",
  	"portal_type": "NR",
@@ -47,6 +52,7 @@
 	"portal_launch":"" 
 	},
  "Belleville city": {
+ 	"name": "Belleville",
  	"state": "IL",
  	"wwc":"N",
  	"portal_type": "GQ",
@@ -56,6 +62,7 @@
 	"portal_launch": ""
 	},
  "Bellevue city": {
+ 	"name": "Bellevue",
  	"state": "WA",
  	"wwc":"Y",
  	"portal_type": "GQ",
@@ -65,6 +72,7 @@
 	"portal_launch": "02-17-2016"
 	},
  "Boulder city": {
+ 	"name": "Boulder",
  	"state": "CO",
  	"wwc": "Y",
  	"portal_type": "GQ",
@@ -75,6 +83,7 @@
 	"portal_launch": "04-01-2013"
 	},
  "Cape Coral city": {
+ 	"name": "CapeCoral",
  	"state": "FL",
  	"wwc": "Y",
  	"portal_type": "GQ",
@@ -85,6 +94,7 @@
 	"portal_launch":"05-01-2017"
 	}, 
  "Cathedral City city": {
+ 	"name": "CathedralCity",
  	"state": "CA",
  	"wwc":"N",
  	"portal_type": "GQ",
@@ -94,6 +104,7 @@
 	"portal_launch": ""
 	},
 "Chelmsford city": {
+	"name": "Chelmsford",
  	"state": "MA",
  	"wwc": "N",
  	"portal_type": "C",
@@ -103,6 +114,7 @@
 	"portal_launch":"" 
 	},
 "Clark county": {
+	"name": "Clark",
  	"state": "WA",
  	"wwc": "N",
  	"portal_type": "C",
@@ -112,6 +124,7 @@
 	"portal_launch":"" 
 	},
  "Columbia city": {
+ 	"name": "Columbia",
  	"state": "MO",
  	"wwc": "Y",
  	"portal_type": "GQ",
@@ -120,7 +133,18 @@
 	"portal": "N",
 	"portal_launch":"" 
 	},
+  "Corona city": {
+ 	"name": "Corona",
+ 	"state": "CA",
+ 	"wwc": "Y",
+ 	"portal_type": "C",
+	"odp":"N",
+	"odp_launch":"",
+	"portal": "N",
+	"portal_launch":"" 
+	},
  "Dayton city": {
+ 	"name": "Dayton",
  	"state": "OH",
  	"wwc": "Y",
  	"portal_type": "C",
@@ -130,6 +154,7 @@
 	"portal_launch":"" 
 	},
  "Denton city": {
+ 	"name": "Denton",
  	"state": "TX",
  	"wwc": "Y",
  	"portal_type": "GQ",
@@ -140,6 +165,7 @@
 	"portal_launch":"02-09-2015" 
 	},
  "El Dorado county" : {
+ 	"name":"ElDorado",
  	"state": "CA",
  	"wwc": "N",
  	"portal_type": "GQ",
@@ -149,6 +175,7 @@
 	"portal_launch": ""
 	},
  "Everett city": {
+ 	"name": "Everett",
  	"state": "WA",
  	"wwc": "N",
  	"portal_type": "GQ",
@@ -158,6 +185,7 @@
 	"portal_launch": ""
 	},
  "Fort Collins city":{
+ 	"name": "FortCollins",
  	"state": "CO",
  	"wwc": "Y",
  	"portal_type": "GQ",
@@ -168,6 +196,7 @@
 	"portal_launch": "2017"
 	},
  "Fort Worth city":{
+ 	"name": "FortWorth",
  	"state": "TX",
  	"wwc": "Y",
  	"portal_type": "GQ",
@@ -178,6 +207,7 @@
 	"portal_launch": "07-01-2014"
 	},
  "Galveston city": {
+ 	"name": "Galveston",
  	"state": "TX",
  	"wwc": "N",
  	"portal_type": "GQ",
@@ -187,6 +217,7 @@
 	"portal_launch":"" 
 	},
  "Greensboro city": {
+ 	"name": "Greensboro",
  	"state": "NC",
  	"wwc": "Y",
  	"portal_type": "C",
@@ -196,7 +227,19 @@
 	"robust_portal": "N",
 	"portal_launch": "10-20-2016" 
 	},
+ "Hayward city": {
+ 	"name": "Hayward",
+ 	"state": "CA",
+ 	"wwc": "Y",
+ 	"portal_type": "C",
+	"odp":"N",
+	"odp_launch": "",
+	"portal": "Y",
+	"robust_portal": "N",
+	"portal_launch": "01-01-2000" 
+	},
  "Joliet city" : {
+ 	"name": "Joliet",
  	"state": "IL",
  	"wwc": "N",
  	"portal_type": "GQ",
@@ -206,6 +249,7 @@
 	"portal_launch":"" 
 	},
  "Kirkland city": {
+ 	"name": "Kirkland",
  	"state": "WA",
  	"wwc": "N",
  	"portal_type": "GQ",
@@ -215,6 +259,7 @@
 	"portal_launch":"" 
 	},
  "Las Cruces city": {
+ 	"name": "LasCruces",
  	"state": "NM",
  	"wwc": "N",
  	"portal_type": "NR",
@@ -225,6 +270,7 @@
 	"portal_launch": "2016" 
 	},
  "Las Vegas city": {
+ 	"name": "LasVegas",
  	"state": "NV",
  	"wwc": "Y",
  	"portal_type": "GQ",
@@ -235,6 +281,7 @@
 	"portal_launch": ""
 	},
  "Lynnwood city": {
+ 	"name": "Lynnwood",
  	"state": "WA",
  	"wwc": "N",
  	"portal_type": "GQ",
@@ -244,6 +291,7 @@
 	"portal_launch":"" 
 	},
  "Mercer Island city": {
+ 	"name": "Mercer",
  	"state": "WA",
  	"wwc": "N",
  	"portal_type": "NR",
@@ -253,6 +301,7 @@
 	"portal_launch":"" 
 	},
  "Miami city": {
+ 	"name": "Miami",
  	"state": "FL",
  	"wwc": "Y",
  	"portal_type": "NR",
@@ -263,6 +312,7 @@
 	"portal_launch": "2018" 
 	},
  "Middleborough city" : {
+ 	"name": "Middleborough",
  	"state": "MA",
  	"wwc": "N",
  	"portal_type": "NR",
@@ -272,6 +322,7 @@
 	"portal_launch":"" 
 	},
  "New Orleans city" : {
+ 	"name" : "Nola",
  	"state": "LA",
  	"wwc": "Y",
  	"portal_type": "NR",
@@ -282,6 +333,7 @@
 	"portal_launch":"" 
 	},
  "Oakland city" : {
+ 	"name": "Oakland",
  	"state": "CA",
  	"wwc": "N",
  	"portal_type": "NR",
@@ -292,6 +344,7 @@
 	"portal_launch": "2013"
 	},
  "Oaklahoma City city": {
+ 	"name": "OKC",
  	"state": "OK",
  	"wwc": "Y",
  	"portal_type": "C",
@@ -302,6 +355,7 @@
 	"portal_launch": "01-26-2015"
 	},
  "Olympia city" : {
+ 	"name": "Olympia",
  	"state": "WA",
  	"wwc": "N",
  	"portal_type": "GQ",
@@ -311,6 +365,7 @@
 	"portal_launch":""
 	},
  "Palo Alto city" : {
+ 	"name": "PaloAlto",
  	"state": "CA",
  	"wwc": "Y",
  	"portal_type": "GQ",
@@ -321,6 +376,7 @@
 	"portal_launch": "08-01-2012"
 	},
  "Peoria city": {
+ 	"name": "Peoria",
  	"state": "AZ",
  	"wwc": "N",
  	"portal_type": "C",
@@ -330,6 +386,7 @@
 	"portal_launch":"" 
 	},
  "Providence city" : {
+ 	"name": "Providence",
  	"state": "RI",
  	"wwc": "Y",
  	"portal_type": "NR",
@@ -340,6 +397,7 @@
 	"portal_launch": "06-01-2013"
 	},
  "Pullman city" : {
+ 	"name": "Pullman",
  	"state": "WA",
  	"wwc": "N",
  	"portal_type": "GQ",
@@ -349,6 +407,7 @@
 	"portal_launch":"" 
 	},
  "Rancho Cucamonga city" : {
+ 	"name": "RanchoCucamonga",
  	"state": "CA",
  	"wwc": "Y",
  	"portal_type": "GQ",
@@ -358,6 +417,7 @@
 	"portal_launch":"" 
 	},
  "Redmond city" : {
+ 	"name": "Redmond",
  	"state": "WA",
  	"wwc": "N",
  	"portal_type": "GQ",
@@ -368,6 +428,7 @@
 	"portal_launch":"06-05-2013" 
 	},
  "Renton city" : {
+ 	"name": "Renton",
  	"state": "WA",
  	"wwc": "N",
  	"portal_type": "GQ",
@@ -377,6 +438,7 @@
 	"portal_launch":"" 
 	},
  "Riverside city" : {
+ 	"name": "Riverside",
  	"state": "CA",
  	"wwc": "Y",
  	"portal_type": "GQ",
@@ -387,6 +449,7 @@
 	"portal_launch":"01-01-2014" 
 	},
  "Sacramento city" : {
+ 	"name": "Sacramento",
  	"state": "CA",
  	"wwc": "N",
  	"portal_type": "GQ",
@@ -397,6 +460,7 @@
 	"portal_launch": "12-01-2013"
 	},
  "Salt Lake City city" : {
+ 	"name": "SaltLakeCity",
  	"state": "UT",
  	"wwc": "Y",
  	"portal_type": "GQ",
@@ -407,6 +471,7 @@
 	"portal_launch": ""
 	},
  "San Francisco city" : {
+ 	"name": "SanFrancisco",
  	"state": "CA",
  	"wwc": "Y",
  	"portal_type": "NR",
@@ -417,6 +482,7 @@
 	"portal_launch": "01-01-2009"
 	},
  "San Mateo city" : {
+ 	"name": "SanMateo",
  	"state": "CA",
  	"wwc":"N",
  	"portal_type": "GQ",
@@ -427,6 +493,7 @@
 	"portal_launch": ""
 	},
  "Saint Paul city" : {
+ 	"name": "StPaul",
  	"state": "MN",
  	"wwc": "Y",
  	"portal_type": "GQ",
@@ -436,6 +503,7 @@
 	"portal_launch":"" 
 	},
  "Tukwila city" : {
+ 	"name": "Tukwila",
  	"state": "WA",
  	"wwc": "N",
  	"portal_type": "GQ",
@@ -445,6 +513,7 @@
 	"portal_launch":"" 
 	},
  "Vallejo city" : {
+ 	"name": "Vallejo",
  	"state": "CA",
  	"wwc": "N",
  	"portal_type": "NR",
@@ -454,6 +523,7 @@
 	"portal_launch":"" 
 	},
  "Washington city" : {
+ 	"name": "WashingtonDC",
  	"state": "DC",
  	"wwc": "Y",
  	"portal_type": "C",
@@ -464,6 +534,7 @@
 	"portal_launch":"08-01-2014" 
 	},
  "West Sacramento city" : {
+ 	"name": "WestSacramento",
  	"state": "CA",
  	"wwc": "N",
  	"portal_type": "NR",
@@ -474,6 +545,7 @@
 	"portal_launch":"" 
 	},
  "Winchester city" : {
+ 	"name": "Winchester",
  	"state": "VA",
  	"wwc": "N",
  	"portal_type": "GQ",
