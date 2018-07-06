@@ -455,7 +455,7 @@
  	"wwc": "N",
  	"portal_type": "GQ",
 	"odp":"Y",
-	"odp_launch": "2013",
+	"odp_launch": "01-01-2013",
 	"portal": "Y",
 	"robust_portal": "Y",
 	"portal_launch": "12-1-2013"
@@ -466,7 +466,7 @@
  	"wwc": "Y",
  	"portal_type": "GQ",
 	"odp":"Y",
-	"odp_launch": "2014",
+	"odp_launch": "1-1-2014",
 	"portal": "Y",
 	"robust_portal": "N",
 	"portal_launch": "1-1-2000"
@@ -529,7 +529,7 @@
  	"wwc": "Y",
  	"portal_type": "C",
 	"odp":"Y",
-	"odp_launch": "2006",
+	"odp_launch": "01-01-2006",
 	"portal": "Y",
 	"robust_portal": "Y",
 	"portal_launch":"8-1-2014" 
