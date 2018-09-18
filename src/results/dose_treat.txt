@@ -1,0 +1,26 @@
+Pooling Model
+
+Call:
+plm(formula = count_p10000 ~ dose.x, data = data_mps, weights = ps_weight, 
+    model = "pooling", index = c("city_x", "month_year"))
+
+Unbalanced Panel: n = 52, T = 2-96, N = 1472
+
+Residuals:
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ -71.74   -5.80   -0.76    6.97    6.54  379.62 
+
+Coefficients:
+            Estimate Std. Error t-value  Pr(>|t|)    
+(Intercept)  2.94247    0.31186  9.4351 < 2.2e-16 ***
+dose.x1      6.74841    0.97702  6.9071 7.344e-12 ***
+dose.x2      3.73015    1.29163  2.8879  0.003934 ** 
+dose.x3      1.92596    4.37957  0.4398  0.660175    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Total Sum of Squares:    687320
+Residual Sum of Squares: 1400700
+R-Squared:      0.00069655
+Adj. R-Squared: -0.0013456
+F-statistic: -249.222 on 3 and 1468 DF, p-value: 1

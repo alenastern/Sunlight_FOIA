@@ -1,0 +1,42 @@
+Pooling Model
+
+Call:
+plm(formula = count_p10000 ~ dose.x + population + pct_bachelor + 
+    rep + pct_white + mayor_council + median_age + X2015 + X2016 + 
+    X2017 + X2018 + months + pct_male + pct_25_34, data = data_mps, 
+    weights = ps_weight, model = "pooling", index = c("city_x", 
+        "month_year"))
+
+Unbalanced Panel: n = 52, T = 2-96, N = 1472
+
+Residuals:
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ -43.65  -11.08   -3.54    0.33    3.77  364.28 
+
+Coefficients:
+                 Estimate  Std. Error t-value  Pr(>|t|)    
+(Intercept)   -4.9999e+01  2.3519e+01 -2.1259 0.0336794 *  
+dose.x1       -1.6930e+00  1.0574e+00 -1.6010 0.1095960    
+dose.x2       -6.3696e+00  1.4619e+00 -4.3572 1.410e-05 ***
+dose.x3       -2.9729e+00  4.0698e+00 -0.7305 0.4652175    
+population    -1.0983e-05  2.0377e-06 -5.3896 8.230e-08 ***
+pct_bachelor   5.6721e+01  1.0840e+01  5.2325 1.917e-07 ***
+rep            7.1956e+00  1.3658e+00  5.2685 1.582e-07 ***
+pct_white      4.9106e+00  2.8081e+00  1.7487 0.0805477 .  
+mayor_council  4.4004e+00  1.3366e+00  3.2923 0.0010177 ** 
+median_age     4.9492e-01  1.3366e-01  3.7028 0.0002212 ***
+X2015          9.3615e-01  1.3401e+00  0.6986 0.4849194    
+X2016          4.0274e+00  1.3393e+00  3.0072 0.0026818 ** 
+X2017          9.5423e+00  1.3878e+00  6.8758 9.118e-12 ***
+X2018          1.2596e+01  1.6832e+00  7.4835 1.247e-13 ***
+months         5.6371e-03  1.8007e-02  0.3131 0.7542833    
+pct_male       5.1861e+01  4.5131e+01  1.1491 0.2506948    
+pct_25_34      2.0268e+00  1.7385e+01  0.1166 0.9072063    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Total Sum of Squares:    687320
+Residual Sum of Squares: 1027200
+R-Squared:      0.10497
+Adj. R-Squared: 0.095133
+F-statistic: -30.0888 on 16 and 1455 DF, p-value: 1

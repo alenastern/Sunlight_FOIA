@@ -1,0 +1,33 @@
+Oneway (individual) effect Random Effect Model 
+   (Swamy-Arora's transformation)
+
+Call:
+plm(formula = count_p10000 ~ policy, data = data_ps, weights = ps_weight, 
+    model = "random", index = c("city_x", "month_year"))
+
+Unbalanced Panel: n = 52, T = 2-96, N = 1472
+
+Effects:
+                 var std.dev share
+idiosyncratic 203.40   14.26 0.435
+individual    263.76   16.24 0.565
+theta:
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.4725  0.8270  0.8608  0.8486  0.8845  0.9107 
+
+Residuals:
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-80.376  -3.573  -1.661  -0.578   0.200 289.218 
+
+Coefficients:
+            Estimate Std. Error t-value Pr(>|t|)    
+(Intercept)  13.0839     2.0147  6.4941 1.14e-10 ***
+policy        1.9323     1.7992  1.0740    0.283    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Total Sum of Squares:    304120
+Residual Sum of Squares: 372270
+R-Squared:      0.0027083
+Adj. R-Squared: 0.0020298
+F-statistic: -269.098 on 1 and 1470 DF, p-value: 1

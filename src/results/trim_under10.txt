@@ -1,0 +1,48 @@
+Oneway (individual) effect Random Effect Model 
+   (Swamy-Arora's transformation)
+
+Call:
+plm(formula = count ~ policy + population + pct_bachelor + rep + 
+    pct_white + mayor_council + median_age + X2015 + X2016 + 
+    X2017 + X2018 + months + pct_male + pct_25_34, data = data10, 
+    model = "random", index = c("city_x", "month_year"))
+
+Unbalanced Panel: n = 41, T = 11-96, N = 1367
+
+Effects:
+                  var std.dev share
+idiosyncratic 11595.5   107.7 0.367
+individual    19974.3   141.3 0.633
+theta:
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.7761  0.8549  0.8789  0.8745  0.8996  0.9225 
+
+Residuals:
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-527.13  -33.97    1.60    0.66   34.79  727.16 
+
+Coefficients:
+                 Estimate  Std. Error t-value  Pr(>|t|)    
+(Intercept)   -1.8657e+03  1.0465e+03 -1.7828 0.0748373 .  
+policy         2.4316e+01  1.6675e+01  1.4582 0.1450131    
+population     4.4494e-04  1.2774e-04  3.4831 0.0005115 ***
+pct_bachelor  -1.9496e+02  6.1156e+02 -0.3188 0.7499312    
+rep            2.8999e+01  7.6274e+01  0.3802 0.7038559    
+pct_white      2.0846e+02  1.8325e+02  1.1375 0.2555143    
+mayor_council  3.6461e+01  5.5529e+01  0.6566 0.5115347    
+median_age     8.3919e+00  6.9275e+00  1.2114 0.2259585    
+X2015          4.2583e+01  1.5338e+01  2.7762 0.0055753 ** 
+X2016          7.9841e+01  1.8052e+01  4.4228 1.052e-05 ***
+X2017          1.2618e+02  2.1909e+01  5.7591 1.045e-08 ***
+X2018          1.5489e+02  2.5439e+01  6.0885 1.483e-09 ***
+months        -6.1235e-02  3.9552e-01 -0.1548 0.8769870    
+pct_male       2.4698e+03  1.9613e+03  1.2593 0.2081567    
+pct_25_34      1.0979e+03  1.1751e+03  0.9344 0.3502901    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Total Sum of Squares:    18564000
+Residual Sum of Squares: 15758000
+R-Squared:      0.15123
+Adj. R-Squared: 0.14244
+F-statistic: 17.2016 on 14 and 1352 DF, p-value: < 2.22e-16

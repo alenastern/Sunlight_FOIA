@@ -1,0 +1,61 @@
+Oneway (individual) effect Random Effect Model 
+   (Swamy-Arora's transformation)
+
+Call:
+plm(formula = count_p10000 ~ policy * X2015 + policy * X2016 + 
+    policy * X2017 + policy * X2018 + policy * mayor_council + 
+    policy * pct_bachelor + policy * median_age + policy * pct_25_34 + 
+    policy * months + policy * rep + policy * pct_white + policy * 
+    pct_male, data = data, model = "random", index = c("city_x", 
+    "month_year"))
+
+Unbalanced Panel: n = 52, T = 2-96, N = 1472
+
+Effects:
+                 var std.dev share
+idiosyncratic 185.81   13.63 0.341
+individual    359.45   18.96 0.659
+theta:
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.5468  0.8577  0.8856  0.8753  0.9052  0.9268 
+
+Residuals:
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-80.412  -1.955  -0.079   0.042   2.177 262.456 
+
+Coefficients:
+                        Estimate  Std. Error t-value  Pr(>|t|)    
+(Intercept)           -70.282490  118.185221 -0.5947   0.55215    
+policy                -35.926425  111.365005 -0.3226   0.74704    
+X2015                  -1.874995    1.994745 -0.9400   0.34739    
+X2016                   2.283004    2.380041  0.9592   0.33760    
+X2017                   7.328062    2.891627  2.5342   0.01137 *  
+X2018                  16.109031    3.369507  4.7808 1.924e-06 ***
+mayor_council          14.826231    7.287297  2.0345   0.04208 *  
+pct_bachelor           23.777937   65.894805  0.3608   0.71827    
+median_age              0.036113    0.856189  0.0422   0.96636    
+pct_25_34               4.541664  144.066146  0.0315   0.97486    
+months                  0.045325    0.051046  0.8879   0.37473    
+rep                     5.266371    9.910806  0.5314   0.59524    
+pct_white              -9.141829   22.227132 -0.4113   0.68092    
+pct_male              146.836126  226.511891  0.6482   0.51693    
+policy:X2015            1.121180    6.736791  0.1664   0.86784    
+policy:X2016           -3.052757    6.806822 -0.4485   0.65387    
+policy:X2017           -8.651033    7.609051 -1.1369   0.25575    
+policy:X2018          -17.460567    8.399582 -2.0787   0.03782 *  
+policy:mayor_council   -7.150261   11.153437 -0.6411   0.52157    
+policy:pct_bachelor  -116.877181  101.747922 -1.1487   0.25087    
+policy:median_age       2.044758    1.464092  1.3966   0.16275    
+policy:pct_25_34       42.134037  298.497227  0.1412   0.88777    
+policy:months           0.062042    0.135465  0.4580   0.64702    
+policy:rep             -3.931964    8.606193 -0.4569   0.64783    
+policy:pct_white       20.477222   30.311079  0.6756   0.49942    
+policy:pct_male       -71.482775  226.088251 -0.3162   0.75192    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Total Sum of Squares:    299280
+Residual Sum of Squares: 268430
+R-Squared:      0.10309
+Adj. R-Squared: 0.087581
+F-statistic: 6.64724 on 25 and 1446 DF, p-value: < 2.22e-16
