@@ -1,0 +1,540 @@
+
+---
+title: "q1_analysis_final"
+author: "Alena Stern"
+date: "8/7/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#import libraries
+library(plm)
+library(psych)
+library(magrittr)
+library(plyr)
+library(dplyr)
+library(Hmisc)
+library(corrplot)
+library(lmtest)
+library(nnet)
+
+#remove items, set working directory, read in data
+remove(list = ls())
+setwd("~/Documents/Sunlight/Sunlight_FOIA/src/analysis")
+data <- read.csv("../data/clean_data.csv", header = TRUE, sep= ",", fill = TRUE)
+data90 <- read.csv("../data/clean_data_90.csv", header = TRUE, sep= ",", fill = TRUE)
+data2011 <- read.csv("../data/clean_data_2011.csv", header = TRUE, sep= ",", fill = TRUE)
+data9010 <- read.csv("../data/clean_data_9010.csv", header = TRUE, sep= ",", fill = TRUE)
+data10 <- read.csv("../data/clean_data_10.csv", header = TRUE, sep= ",", fill = TRUE)
+data_nocc <- read.csv("../data/clean_data_nocc.csv", header = TRUE, sep= ",", fill = TRUE)
+
+#calculate population adjusted dependent variables
+data$pop_10000 <- data$population/10000
+data90$pop_10000 <- data90$population/10000
+data10$pop_10000 <- data10$population/10000
+data_nocc$pop_10000 <- data_nocc$population/10000
+data$count_p10000 <- data$count/data$pop_10000
+data90$count_p10000 <- data90$count/data90$pop_10000
+data10$count_p10000 <- data10$count/data10$pop_10000
+data_nocc$count_p10000 <- data_nocc$count/data_nocc$pop_10000
+
+# calculate logged dependent varriable
+data$log_count <- log(data$count)
+
+# calculate dose variable
+data$dose <- 0
+data$dose[data$policy > 0 | data$portal > 0] <- 1
+data$dose[data$robust_policy > 0 | data$robust_portal > 0] <- 2
+data$dose[data$robust_policy > 0 & data$robust_portal > 0] <- 3
+```
+
+# Model Selection
+
+## 1. Testing Pooled OLS, Fixed Effects, and Random Effects
+
+```{r pooled OLS test}
+# pooled OLS
+pool <- plm(count ~ policy, data = data, index = c("city_x", "month_year"), model = "pooling")
+summary(pool)
+plmtest(pool, type="bp")
+```
+
+The results of the Breush-Pagan LM test indicate that we reject the null hypothesis that the variance of the unobserved heterogeneity is zero, meaning that we will not have efficient estimates using OLS. 
+
+```{r re and fe test}
+# random effects model
+random = plm(count ~ policy, data = data, index = c("city_x", "month_year"), model = "random")
+summary(random)
+
+# fixed effects model
+fixed = plm(count ~ policy, data = data, index = c("city_x", "month_year"), model = "within")
+summary(fixed)
+
+# Hausman test 
+phtest(random, fixed)
+```
+
+We then run the random effects and fixed effects models and perform the Hausman Test of the null hypothesis that is that the unobserved heterogeneity $\alpha_i$  and the regressors $X_{it}$  are uncorrelated. With a p-value of 0.2164, we fail to reject the null hypothesis which means that *we will use the Random Effects model for our analysis*.
+
+## 2. Identifying covariates
+
+To identify the covariates to include in our analysis, we calculate the pairwise correlation of our explanatory variables to identify potential collinearity.
+
+```{r}
+num_vars = c("count", "policy", "portal", "population", "median_age", "median_gross_rent", "median_income", 
+             "pct_25_34", "pct_male", "pct_black", "pct_white", "pct_bachelor", "Budget_1617", "X2015", "X2016",      "X2017", "X2018", "mayor_council", "council_manager", "dem", "rep", "robust_portal", "robust_policy", "dose", "treat_score")
+num_data = data[num_vars]
+M <- cor(as.matrix(num_data), use = "complete.obs", method="pearson")
+corrplot(M, method = "circle")
+```
+
+As we can see in the plot above, we have several sets of collinear variables:
+* population, Budget_1617: strong positive correlation. 
+* median_income, median_gross_rent, pct_bachelor: strong positive correlations. 
+* dem, rep: strong negative correlation (mutually exclusive). 
+* pct_black, pct_white: strong negative correlation. 
+* mayor_council, council_manager: strong negative correlation (mutually exclusive). 
+* robust_portal, treat_score, portal, policy, portal_months, policy_months: strong positive correlation.
+
+We therefore will only use one model in each set in our analysis. To identify which covariate in each set to use, we try all possible combinations of covariates (with one variable from each set above) and pick the model with the highest R-squared. 
+
+```{r} 
+#Testing covariates
+parameters <- expand.grid(dv = "count", 
+                          x1 = "policy",
+                          x2 = c("population", "Budget_1617"),
+                          x3 = c("median_income", "median_gross_rent", "pct_bachelor"),
+                          x4 = c("rep", "dem"),
+                          x5 = c("pct_black", "pct_white"),
+                          x6 = c("mayor_council", "council_manager"),
+                          x7 = "median_age",
+                          x8 = "X2015",
+                          x9 = "X2016",
+                          x10 = "X2017",
+                          x11 = "X2018",
+                          x12 = "months",
+                          x13 = "pct_male",
+                          x14 = "pct_25_34",
+                          stringsAsFactors = FALSE)
+models <- list()
+for(i in 1:49){
+  row <- parameters[i,]
+  formula.plm <- substitute(y~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9 + x10 + x11 + x12 + x13 + x14,
+                            list(y = as.name(row[[1]]),
+                                 x1 = as.name(row[[2]]),
+                                 x2 = as.name(row[[3]]),
+                                 x3 = as.name(row[[4]]),
+                                 x4 = as.name(row[[5]]),
+                                 x5 = as.name(row[[6]]),
+                                 x6 = as.name(row[[7]]),
+                                 x7 = as.name(row[[8]]),
+                                 x8 = as.name(row[[9]]),
+                                 x9 = as.name(row[[10]]),
+                                 x10 = as.name(row[[11]]),
+                                 x11 = as.name(row[[12]]),
+                                 x12 = as.name(row[[13]]),
+                                 x13 = as.name(row[[14]]),
+                                 x14 = as.name(row[[15]])))
+  possibleError <- tryCatch(plm(eval(formula.plm), data = data, index = c("city_x", "month_year"), model = "random"),
+                            error = function(e) e)
+  if(!inherits(possibleError, "error")){
+    models[[i]] <- plm(eval(formula.plm), data = data, index = c("city_x", "month_year"), model = "random")
+  }
+  if(inherits(possibleError, "error")){
+    print(parameters[i,])
+  }
+} 
+
+m <- plyr::compact(models)
+summaries <- lapply(m, summary)
+coef_p <- lapply(summaries, function(x) x$coefficients[, c(1,4)])
+r2 <- sapply(summaries, function(x) c(r_sq = x$r.squared, 
+                                       adj_r_sq = x$adj.r.squared))
+i = which.max(r2)
+coef_p[ceil(i/2)]
+summaries[[9]]
+
+```
+
+The best model (henceforth referred to as 'main model') is as follows:
+
+$R_it$ = $\beta_{0} + \beta_{1}T_{it} + \beta_{2}population_{i} + \beta_{3}pctbachelor_{i} + \beta_{4}rep_{i} + \beta_{5}pctwhite_{i} + \beta_{6}medianage_{i} + \beta_{7}X2015_{t} + \beta_{8}X2016_{t} \beta_{9}X2017_{t} + \beta_{10}X2018_{t} + \beta_{11}months_{it} + \beta_{12}pctmale_{i} + \beta_{13}pct25_-34_{i} + e_{it}$
+
+We can see the results of fitting our main model below:
+```{r}
+sink("../results/main_model_count.txt")
+re_main_count = plm(count ~ policy + population + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34, data = data, index = c("city_x", "month_year"), model = "random")
+print(summary(re_main_count))
+sink()
+```
+
+We see that this model has an overall R-Squared of .164. The policy variable is insignificant. The population and time dummy variables are both significant and positive. This indicates general growth on PRR volume over time or the fact that larger cities have a higher volume of PRRs. This may also be confounding the effect of policy on PRR volume, as cities in the treatment group are more than twice as large on average as those in the control group (avg. population of 316,906 vs. 142,476). We address these time and population effects in our analysis. 
+
+## 3. Trimming the Sample 
+
+We test whether cities with a small or large number of observations are skewing our results. We run our model on the following four subsamples:
+1. Dropping Cape Coral from the analysis, which only has two full months of data (n = 50, obs = 1426). 
+2. Dropping all cities with less than 10 months of data (n = 39, obs = 1251). 
+2. Dropping all cities with more than 90 months of data (n = 47, obs = 1122) 
+4. Dropping all observations before 2011 (n = 51, obs = 1408)
+5. Dropping all cities with less than 10 or more than 90 months of data (n = 39, obs = 1177)
+
+```{r, include = FALSE}
+#dropping Cape Coral (2 obs)
+sink("../results/trim_capecoral.txt")
+re_cc = plm(count ~ policy + population + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34, data = data_nocc, index = c("city_x", "month_year"), model = "random")
+print(summary(re_cc))
+sink()
+
+# dropping cities with < 10 obs
+sink("../results/trim_under10.txt")
+re_10 = plm(count ~ policy + population + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34, data = data10, index = c("city_x", "month_year"), model = "random")
+print(summary(re_10))
+sink()
+
+# dropping cities with > 90 obs
+sink("../results/trim_over90.txt")
+re_90 = plm(count ~ policy + population + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34, data = data90, index = c("city_x", "month_year"), model = "random")
+print(summary(re_90))
+sink()
+
+# dropping obs before 2011 
+sink("../results/trim_before2011.txt")
+re_2011 = plm(count ~ policy + population + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34, data = data2011, index = c("city_x", "month_year"), model = "random")
+print(summary(re_2011))
+sink()
+
+# only cities 10 < obs < 90
+sink("../results/trim_under10over90.txt")
+re_9010 = plm(count ~ policy + population + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34, data = data9010, index = c("city_x", "month_year"), model = "random")
+print(summary(re_9010))
+
+```
+
+We find that these different samples do impact the overall fit and significance of terms. We find that the first model reduces the overall fit while the first and fifth render the policy variable insignificant. The other specifications all increase the overall fit, with the second and third increasing overall fit significantly (with adjusted R-squared of .19 and .23 respectively). The policy and population terms are also more highly significant in these models. We however decide to continue with the full sample as the gains in fit in the trimmed samples disappear when we use a population-adjusted DV (see more below).
+
+# Findings: Population-Adjusted DV
+
+Noting the significance of the population variable, we try running our main model with a population-adjusted dependent variable of public record requests per 10000 people, and therefore drop the population independent variable. We think that this provides a better measure of the effect of policy on PRR volume, as it controls for the fact that cities with larger populations will have more PRRs because they have more potential requesters. 
+
+```{r}
+## Policy per 10000
+
+re_main_p10000 = plm(count_p10000 ~ policy + population + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34, data = data, index = c("city_x", "month_year"), model = "random")
+summary(re_main_p10000)
+
+sink("../results/main_model.txt")
+print(summary(re_main_p10000))
+sink()  
+
+```
+Interestingly, the coefficient on policy becomes negative and is statistically significant at the 1% level. The coefficient on policy can be interpreted as adopting a policy yields a decrease of 6.48 public record requests per 10,000 residents each month on average holding all else equal. **This means a city of 200,000 (slightly below the average of 220,373 in our sample) that adopts an open data policy would receive on average approximately 130 fewer requests per month.** We also note that the population coefficient is now negative and statistically significant. This makes sense as population is now in the denominator and thus very large population sizes decreases the PRR volume per 10000 residents. We also note that the coefficients on the 2017 and 2018 dummy variables are positive and significant, reinforcing the time trends observed above, and that the mayor council variable is positive and weakly significant.
+
+# Robustness of Open Data Program
+
+To test whether the robustness of a city's open data program affects the volume of PRRs received, we run our main population-adjusted model with a variety of different treatment variables:
+* portal
+* robust policy
+* robust portal
+* treatment score (1 point each assigned for policy, portal, robust policy, robust portal)
+* dose (0-3 where a city is scored 1 for having either a policy or portal, 2 for having a robust policy or portal, and 3 for having both a robust policy and portal).
+
+We then determine whether a more comprehensive open data program has a greater effect on PRR volume by running difference of coefficient significance tests on the coefficients on our different treatment variables. 
+
+```{r treatment intensity}
+## Portal ##
+sink("../results/main_model_portal.txt")
+re_p10000_portal = plm(count_p10000 ~ portal + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34, data = data, index = c("city_x", "month_year"), model = "random")
+print(summary(re_p10000_portal))
+sink()
+
+## Robust_Portal ##
+sink("../results/main_model_robust_portal.txt")
+re_p10000_robust_portal = plm(count_p10000 ~ robust_portal + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34, data = data, index = c("city_x", "month_year"), model = "random")
+print(summary(re_p10000_robust_portal))
+sink()
+
+### Robust Portal Trimmed Data ###
+
+data_portal_trim <- data[ which(data$city_x != "Cape Coral city" & data$city_x != "Fort Worth city" & 
+                                  data$city_x != "Greensboro city" & data$city_x != "Palo Alto city" &
+                                  data$city_x != "Riverside city"), ]
+# count per 10000 residents
+re_p10000_alt = plm(count_p10000 ~ robust_portal + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34, data = data_portal_trim, index = c("city_x", "month_year"), model = "random")
+summary(re_p10000_alt)
+
+## Robust_Policy ##
+sink("../results/main_model_robust_policy.txt")
+re_p10000_robust_policy = plm(count_p10000 ~ robust_policy + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34, data = data, index = c("city_x", "month_year"), model = "random")
+print(summary(re_p10000_robust_policy))
+sink()
+
+## Treatment Score ##
+sink("../results/main_model_treat_score.txt")
+re_p10000_treat_score = plm(count_p10000 ~ treat_score + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34, data = data, index = c("city_x", "month_year"), model = "random")
+print(summary(re_p10000_treat_score))
+sink()
+
+## Dose ##
+# count per 10000 residents
+data$dose <- as.factor(data$dose)
+sink("../results/main_model_dose.txt")
+re_p10000_dose = plm(count_p10000 ~ dose + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34, data = data, index = c("city_x", "month_year"), model = "random")
+print(summary(re_p10000_dose))
+sink()
+
+# Policy vs. Robust Policy
+dist_coef_b <- rnorm(10000,mean=-6.4802,sd=2.0708) #mean is coef., sd is standard error
+dist_coef_a <- rnorm(10000,mean=-9.2319,sd=5.3946)
+diff <- dist_coef_a - dist_coef_b
+quantile(diff,c(.025,.975)) #95% CI
+1-(sum(diff < 0)/10000) #one-tailed p-value
+2*(1-sum(diff < 0)/10000) #two-tailed p-value
+
+# Portal vs. Robust Portal
+dist_coef_b <- rnorm(10000,mean= 0.8824,sd=1.7239) #mean is coef., sd is standard error
+dist_coef_a <- rnorm(10000,mean=-7.1499,sd=3.9202)
+diff <- dist_coef_a - dist_coef_b
+quantile(diff,c(.025,.975)) #95% CI
+1-(sum(diff < 0)/10000) #one-tailed p-value
+2*(1-sum(diff < 0)/10000) #two-tailed p-value
+```
+
+Interestingly, portal is insignificant for the population adjusted DV. Also, robust_policy and robust_portal are significant and negative for both the count and population-adjusted count DVs, and have larger negative coefficients than their non-robust counterparts. The robust_portal treatment has a coefficient of -7.15, and we find that the difference between the portal and robust_portal coefficients is significant at the 5% level. The robust_policy treatment has a coefficient of -9.23 which is larger than the coefficient on the policy treatment, though the difference between the coefficients is not significant at the 5% level. **It is clear that as cities invest in more robust open data portals, the magnitude of the effect on PRRs increases. There is also some initial evidence that cities adopting more robust open data policies will increase the magnitude of the effect on PRRs, though this finding should be interpreted cautiously given the null result of the difference of coefficients significance test.**
+
+# Findings: Interacted Models
+To further understand how the effect of adopting an open data policy varies across time and city characteristics, we run our main count and population-adjusted models with our covarites interacted with the policy variable.
+
+```{r}
+sink("../results/main_model_interacted.txt")
+re_int_p10000_all = plm(count_p10000 ~ policy*X2015 + policy*X2016 + policy*X2017 + policy*X2018 + policy*mayor_council + policy*pct_bachelor + policy*median_age + policy*pct_25_34 + policy*months +
+                      policy*rep + policy*pct_white + policy*pct_male, data= data, index = c("city_x", "month_year"), model = "random")
+print(summary(re_int_p10000_all))
+sink()
+
+# we do not include population in this model because it is computationally singular
+sink("../results/main_model_count_interacted.txt")
+re_int_p10000_all_count = plm(count ~ policy*X2015 + policy*X2016 + policy*X2017 + policy*X2018 + policy*mayor_council + policy*pct_bachelor + policy*median_age + policy*pct_25_34 + policy*months +
+                      policy*rep + policy*pct_white + policy*pct_male + policy*policy_months, data= data, index = c("city_x", "month_year"), model = "random")
+print(summary(re_int_p10000_all_count))
+sink()
+
+```
+
+
+Interpreting the coefficients of year dummy interaction terms of the population-adjusted DV model, we can conclude that marginal effect of adopting an open data policy grows with each year. In fact, when we interact the policy term with dummy variables for 2015-2018, the effect of adopting an open data policy only becomes significant in 2018, with a coefficient twice as large as that in 2017 (-17.46 in 2018 versus -8.65 in 2017). **This finding indicates that the marginal impact of adopting an open data program increases over time.** However, it is unclear whether this trend is the result of general time trends (eg. such as population growth or increasing technological literacy of the population over time) versus the maturation effect of the policy itself.
+
+To better understand the role of the maturation effect, we run a model interacting policy and policy_months (the number of months an open data policy has been in place) with raw count as the dependent variable. We see a strongly significant negative coefficient on the interaction term. **This means that the longer an open data policy has been in place, the greater reduction of PRRs a city experiences on average. On average, a city receives about 4 fewer PRRs per month for each month a policy has been in place.**
+
+# Robustness Checks
+We also run several robustness checks of our results:
+  1) Running the models with logged count to dampen the effect of cities with large volumes of requests.
+  2) Running the models with clustered standard errors
+  3) Running the models with 3 and 6 month lagged treatments
+  4) Inverse Propensity Score Weighting
+  
+```{r}
+#logged count
+sink("../results/logged_dv.txt")
+re_log = plm(log_count ~ policy + X2015 + X2016 + X2017 + X2018 + population + pct_bachelor + mayor_council + pct_25_34 + rep + pct_white + median_age, data = data, index = c("city_x", "month_year"), model = "random")
+print(summary(re_log))
+sink()
+
+#clustered standarad errors
+sink("../results/clustered_se.txt")
+re_count10_final = plm(count_p10000 ~ policy + X2015 + X2016 + X2017 + X2018 + population + pct_bachelor + mayor_council + pct_25_34 + rep + pct_white + median_age, data = data, index = c("city_x", "month_year"), model = "random")
+coeftest(re_count10_final)
+coeftest(re_count10_final, vcovHC)
+coeftest(re_count10_final, vcovHC(re_count10_final, type = "HC3"))
+sink()
+
+#lagged treatment
+
+## 3 months
+# count p10000- policy
+sink("../results/lag_3mos.txt")
+re_yr_lag3 = plm(count_p10000 ~ policy_lag3 + X2015 + X2016 + X2017 + X2018 + population + pct_bachelor + mayor_council + pct_25_34 + rep + pct_white + median_age + pct_male + months , data = data, index = c("city_x", "month_year"), model = "random")
+print(summary(re_yr_lag3))
+sink()
+
+## 6 months
+# count p10000- policy
+sink("../results/lag_6mos.txt")
+re_yr_lag6 = plm(count_p10000 ~ policy_lag6 + X2015 + X2016 + X2017 + X2018 + population + pct_bachelor + mayor_council + pct_25_34 + rep + pct_white + median_age + pct_male + months, data = data, index = c("city_x", "month_year"), model = "random")
+print(summary(re_yr_lag6))
+sink()
+```
+
+```{r pscore}
+# convert panel data into single observation for each city. Because covariates are time-invariant, the mean 
+# is the constant value
+by_city <- data %>% group_by(city_x)
+data_09 <- by_city %>% summarise(
+policy = mean(policy),
+portal = mean(portal),
+robust_policy = mean(robust_policy),
+robust_portal = mean(robust_portal),
+population_09 = mean(population_09),
+median_age_09 = mean(median_age_09),
+median_income_09 = mean(median_income_09),
+pct_25_34_09 = mean(pct_25_34_09),
+pct_male_09 = mean(pct_male_09),
+pct_black_09 = mean(pct_black_09),
+pct_white_09 = mean(pct_white_09),
+pct_bachelor_09 = mean(pct_bachelor_09),
+population_09 = mean(population_09),
+mayor_council = mean(mayor_council)
+)
+
+#create binary treatment variable = 1 if they ever adopted an open data policy 
+data_09$treatment <- ifelse(data_09$policy > 0, 1, 0)
+
+#### Binary example where treatment = adopted open data policy ####
+
+# Logistic regression of treatment status on covariates
+m_ps <- glm(treatment ~ population_09 + median_age_09 + median_income_09 + pct_25_34_09 + pct_male_09 + pct_black_09 + pct_white_09 + pct_bachelor_09 + mayor_council,
+            family = binomial(), data = data_09)
+summary(m_ps)
+
+# Calculate propensity scores - probability of being treated based on logit 
+data_09$ps <- predict(m_ps, type = "response")
+vars <- c("city_x", "ps", "treatment")
+data_city_ps <- data_09[vars]
+
+# merge propensity score into panel data
+data_ps <- merge(data, data_city_ps, by = "city_x", all = TRUE)
+
+# city averages
+by_city_ps <- data_ps %>% group_by(city_x)
+data_city <- by_city_ps %>% summarise(
+  treatment_pol = mean(treatment_pol),
+  treatment_por = mean(treatment_por),
+  ps = mean(ps),
+  population = mean(population),
+  median_age = mean(median_age),
+  median_income = mean(median_income),
+  pct_25_34 = mean(pct_25_34),
+  mayor_council = mean(mayor_council),
+  count = mean(count),
+  count_p10000 = mean(count_p10000)
+)
+
+# We run our models using both regular and stable propensity score weights. The difference is that stable weights use the proportion of the population receiving a given dose as the numerator to calculate the weights (while regular weights use 1 as the numerator). We include both calculations but ultimately decide to use the stable weights because they give a better model fit.
+
+data_ps$ps_weight <- ifelse(data_ps$treatment == 1, 1/data_ps$ps, 1/(1-data_ps$ps))
+data_ps$ps_weight_stable <- ifelse(data_ps$treatment == 1, mean(data_ps$treatment)/data_ps$ps, (1-mean(data_ps$treatment))/(1-data_ps$ps))
+
+#######################
+### Regular Weights ###
+#######################
+
+# just treatment
+sink("../results/pscore_treat.txt")
+re <- plm(count_p10000 ~ policy, data = data_ps, index = c("city_x", "month_year"), model = "random", weights = ps_weight)
+print(summary(re))
+sink()
+
+# with covariates
+sink("../results/pscore_treat_all.txt")
+re <- plm(count_p10000 ~ policy + population + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34,
+            data = data_ps, index = c("city_x", "month_year"), model = "random", weights = ps_weight)
+print(summary(re))
+sink()
+
+######################
+### Stable Weights ###
+######################
+
+# just treatment
+sink("../results/pscore_stable_treat.txt")
+re <- plm(count_p10000 ~ policy, data = data_ps, index = c("city_x", "month_year"), model = "random", weights = ps_weight_stable)
+print(summary(re))
+sink()
+
+# with covariates
+sink("../results/pscore_stable_all.txt")
+re <- plm(count_p10000 ~ policy + population + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34,
+          data = data_ps, index = c("city_x", "month_year"), model = "random", weights = ps_weight_stable)
+print(summary(re))
+sink()
+
+###############################
+#### Multi-Level Treatment ####
+###############################
+
+#create dose variable to reflect 4 treatment levels
+data_09$dose <- 0
+data_09$dose[data_09$policy > 0 | data_09$portal > 0] <- 1
+data_09$dose[data_09$robust_policy > 0 | data_09$robust_portal > 0] <- 2
+data_09$dose[data_09$robust_policy > 0 & data_09$robust_portal > 0] <- 3
+data_09$dose <- factor(data_09$dose)
+
+# Estimate multinomial logit regression - we use multinomial logit instead of ordered logit because, even though the doses are ordered, the distances between the rankings is likely unequal, violating the ordered logit assumptions. Multinomial logit output predicts probability for all different possibilities of the treatment dose.
+
+
+# scale data so Hessian matrix converges
+newData<-data.frame(dose=data_09$dose, scale(data_09[,c("population_09", "median_age_09", "median_income_09", "pct_25_34_09", "pct_male_09", "pct_black_09", "pct_white_09", "pct_bachelor_09", "mayor_council")])) 
+
+# run multinomial logit
+mlm <- multinom(dose ~ population_09 + median_age_09 + median_income_09 + pct_25_34_09 + pct_male_09 + pct_black_09 + pct_white_09 + pct_bachelor_09 + mayor_council,
+          data = newData, Hess=TRUE)
+summary(mlm)
+
+# calculate propensity score for each dose level (four total)
+preds <- predict(mlm, type = "probs")
+data_09$ps_0 <- preds[,1]
+data_09$ps_1 <- preds[,2]
+data_09$ps_2 <- preds[,3]
+data_09$ps_3 <- preds[,4]
+
+# merge propensity scores + dose with main data 
+vars_m <- c("city_x", "dose", "ps_0", "ps_1", "ps_2", "ps_3")
+data_city_mps <- data_09[vars_m]
+data_mps <- merge(data, data_city_mps, by = "city_x", all = TRUE)
+
+# create ps.weight variable
+data_mps$ps <- ifelse(data_mps$dose.x == "0", data_mps$ps_0, 
+                      ifelse(data_mps$dose.x == "1", data_mps$ps_1,
+                             ifelse(data_mps$dose.x == "2", data_mps$ps_2,
+                                    ifelse(data_mps$dose.x == "3", data_mps$ps_3, 0))))
+data_mps$ps_weight <- 1/data_mps$ps
+
+data_mps$ps_weight_stable <- ifelse(data_mps$dose.x == "0", (23/52)/data_mps$ps_0, 
+                                ifelse(data_mps$dose.x == "1", (17/52)/data_mps$ps_1,
+                                  ifelse(data_mps$dose.x == "2", (9/52)/data_mps$ps_2,
+                                    ifelse(data_mps$dose.x == "3", (3/52)/data_mps$ps_3, 0))))
+
+                                                           
+## calculate effect of policy using pooled OLS weighted by ps_weight - count p_10000 ##
+
+# just treatment
+sink("../results/dose_treat.txt")
+pool <- plm(count_p10000 ~ dose.x, data = data_mps, index = c("city_x", "month_year"), model = "pooling", weights = ps_weight)
+print(summary(pool))
+sink()
+
+# with covariates
+sink("../results/dose_all.txt")
+pool <- plm(count_p10000 ~ dose.x + population + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34,
+          data = data_mps, index = c("city_x", "month_year"), model = "pooling", weights = ps_weight)
+print(summary(pool))
+sink()
+
+
+# with covariates
+sink("../results/dose_all_re.txt")
+re <- plm(count_p10000 ~ dose.x + population + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34,
+            data = data_mps, index = c("city_x", "month_year"), model = "random", weights = ps_weight)
+print(summary(re))
+sink()
+
+sink("../results/dose_all_re_stable.txt")
+re <- plm(count_p10000 ~ dose.x + population + pct_bachelor + rep + pct_white + mayor_council + median_age + X2015 + X2016 + X2017 + X2018 + months + pct_male + pct_25_34,
+          data = data_mps, index = c("city_x", "month_year"), model = "random", weights = ps_weight_stable)
+print(summary(re))
+sink()
+
+```
+  
+In all cases, our robustness checks confirm our overall result that adopting an open data policy yields a significant decrease in the number of PRRs a city receives per 10,000 residents. We do find that in some cases the coefficient is lower than our main model providing conservative estimate of the average treatment effect.
