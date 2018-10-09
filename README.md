@@ -22,10 +22,10 @@ This project is currently ongoing and all documents in this repository are inter
 
 ## Project Results (forthcoming)
 * Blog Posts:
-  * Overview of Key Findings
+  * [Overview of Key Findings](https://sunlightfoundation.com/2018/10/09/research-cities-save-time-on-records-requests-by-doing-open-data-right/)
   * Popular Open Data vs. Public Record Requests
   * Deep Dive: Greensboro, North Carolina
-* White Paper (full methodology and results)
+* [White Paper (full methodology and results)](http://sunlightfoundation.com/wp-content/uploads/2018/10/alena-white-paper-PDF.pdf)
 
 ## Repository Structure
 This repository is structured with the following directories:
