@@ -1,2 +1,16 @@
-beautifulsoup4==4.6.0ehich
+beautifulsoup4==4.6.0
+gensim==3.5.0
+jsonschema==2.6.0
+lda==1.0.5
+matplotlib==2.2.2
+nltk==3.2.4
+numpy==1.14.2
+pandas==0.21.0
+pandas-profiling==1.4.1
+pyproj==1.9.5.1
+python-dateutil==2.7.2
+regex==2017.4.5
 requests==2.18.4
+seaborn==0.8
+sodapy==1.4.6
+spacy==2.0.12
