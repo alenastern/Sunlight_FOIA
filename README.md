@@ -20,11 +20,11 @@ Version 1.0 (edited 06/28/2018) of our [Pre-Analysis Plan](https://docs.google.c
 
 This project is currently completed and all documents in this repository are final files. The requirements.txt file is currently undergoing updates (10/9/18)
 
-## Project Results (forthcoming)
+## Project Results
 * Blog Posts:
   * [Overview of Key Findings](https://sunlightfoundation.com/2018/10/09/research-cities-save-time-on-records-requests-by-doing-open-data-right/)
-  * Popular Open Data vs. Public Record Requests
-  * Deep Dive: Greensboro, North Carolina
+  * [Popular Open Data vs. Public Record Requests](https://sunlightfoundation.com/2018/10/16/results-from-analyzing-public-record-requests/) 
+  * [Deep Dive: Greensboro, North Carolina](https://sunlightfoundation.com/2018/10/18/doing-data-differently-greensboros-evolving-open-data-program/) 
 * [White Paper (full methodology and results)](http://sunlightfoundation.com/wp-content/uploads/2018/10/alena-white-paper-PDF.pdf)
 
 ## Repository Structure
