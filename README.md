@@ -20,6 +20,8 @@ Version 1.0 (edited 06/28/2018) of our [Pre-Analysis Plan](https://docs.google.c
 
 This project is currently completed and all documents in this repository are final files. The requirements.txt file is currently undergoing updates (10/9/18)
 
+The requirements.txt file is up to date (12/26/18)
+
 ## Project Results
 * Blog Posts:
   * [Overview of Key Findings](https://sunlightfoundation.com/2018/10/09/research-cities-save-time-on-records-requests-by-doing-open-data-right/)
